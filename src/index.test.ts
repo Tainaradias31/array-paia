@@ -1,70 +1,103 @@
+import { test, expect} from "vitest";
 
-import { test,expect} from 'vitest';
+/**
+ * Exercício 01 - cria um novo vetor com os valores do vetor original mais dois novos valores
+ * Nome da função - criaNovoVetor
+ * Crie uma função que retorne um novo vetor com os valores do vetor original mais dois novos valores
+ * @param {number[]} vetor Vetor de números
+ * @param {number} valor1 Primeiro valor a ser adicionado
+ * @param {number} valor2 Segundo valor a ser adicionado
+ * @returns {number[]} Retorna um novo vetor com os valores do vetor original mais dois novos valores
+ * @example
+ * criaNovoVetor([1, 2, 3], 4, 5) // [1, 2, 3, 4, 5]
+ * criaNovoVetor([1, 2, 3], 0, 0) // [1, 2, 3, 0, 0]
+ */ 
 
-//Questão 1
-import { calcularQuadrado } from './quadrado';
-test('Calcular o quadrado de um número', () => {
- expect(calcularQuadrado(2)).toBe(4);
- expect(calcularQuadrado(0)).toBe(0);
- expect(calcularQuadrado(-3)).toBe(9);
- expect(calcularQuadrado(1.5)).toBe(2.25);
+//Início do seu código
+function criaNovoVetor(vetor: number[], valor1:number, valor2:number ): number[] {
+   let novovalor = vetor.concat(valor1, valor2)
+   return novovalor;
+   
+}
+
+//Fim do seu código
+
+test('criaNovoVetor com os novos dois valores passados', () => {
+    let vetor = [1, 2, 3]
+    expect(criaNovoVetor(vetor, 4, 5)).toEqual([1, 2, 3, 4, 5])
+    expect(vetor).toEqual([1, 2, 3])
+})
+test('criaNovoVetor com os novos dois valores passados', () => {
+    let vetor = [1, 2, 3]
+    expect(criaNovoVetor(vetor, 0, 0)).toEqual([1, 2, 3, 0, 0])
+    expect(vetor).toEqual([1, 2, 3])
+})
+
+
+/**
+ * Exercício 02 - Inverte a ordem dos caracteres de uma string
+ * Nome da função - inverteString
+ * Crie uma função que receba uma string e retorne essa string com os caracteres em ordem inversa.
+ * @param {string} str A string que será invertida
+ * @returns {string} Retorna a string com os caracteres em ordem inversa
+ * @example
+ * inverteString("hello") // "olleh"
+ * inverteString("abcdef") // "fedcba"
+ */ 
+
+// Início do seu código
+//OBS: não use as funções reverse e join
+function inverteString(str) {
+  
+        let String = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+            String += str[i];
+        }
+        return String;
+}
+   
+// Fim do seu código
+
+test('inverteString deve inverter a string corretamente', () => {
+    expect(inverteString("hello")).toBe("olleh");
+    expect(inverteString("abcdef")).toBe("fedcba");
+    expect(inverteString("12345")).toBe("54321");
+    expect(inverteString("!@#$%")).toBe("%$#@!");
 });
-//Questão 2
-import { ehPositivo } from './positivo';
-test('Verificar se um número é positivo', () => {
- expect(ehPositivo(2)).toBe(true);
- expect(ehPositivo(-3)).toBe(false);
- expect(ehPositivo(0)).toBe(false);
- expect(ehPositivo(1.5)).toBe(true);
-});
-//Questão 3
-import { calcularMedia } from './media';
-test('Calcular média de três números', () => {
- expect(calcularMedia(2, 4, 6)).toBe(4);
- expect(calcularMedia(1, 1, 1)).toBe(1);
- expect(calcularMedia(-1, 0, 1)).toBe(0);
- expect(calcularMedia(10, 20, 30)).toBe(20);
-});
-//Questão 4
-import { ehAnoBissexto } from './bissexto';
-test('Verificar se um ano é bissexto', () => {
- expect(ehAnoBissexto(2020)).toBe(true);
- expect(ehAnoBissexto(2021)).toBe(false);
- expect(ehAnoBissexto(2000)).toBe(true);
- expect(ehAnoBissexto(1900)).toBe(true);
-});
-//Questão 5
-import { calcularFatorial } from './fatorial';
-test('Calcular fatorial de um número', () => {
- expect(calcularFatorial(0)).toBe(1);
- expect(calcularFatorial(1)).toBe(1);
- expect(calcularFatorial(5)).toBe(120);
- expect(calcularFatorial(10)).toBe(3628800);
-});
-//Questão 6
-import { encontrarMenorNumero } from './menorvetor';
-// Teste: encontrar o menor número em um array de números positivos
-test('encontra o menor número em um array de números positivos', () => {
- const numeros = [3, 1, 5, 2, 4];
- expect(encontrarMenorNumero(numeros)).toBe(1);
-});
-// Teste: encontrar o menor número em um array de números negativos
-test('encontra o menor número em um array de números negativos', () => {
- const numeros = [-3, -1, -5, -2, -4];
- expect(encontrarMenorNumero(numeros)).toBe(-5);
-});
-//Questão 7
-import { calcularMaior } from './maior';
-test('Calcular o maior entre dois números', () => {
- expect(calcularMaior(2, 3)).toBe(3);
- expect(calcularMaior(5, 1)).toBe(5);
- expect(calcularMaior(-1, 0)).toBe(0);
- expect(calcularMaior(10, 10)).toBe(10);
-});
-//Questão 8
-import { concatenarStrings } from './concatenar';
-test('Concatenar duas strings', () => {
- expect(concatenarStrings('Olá, ', 'mundo!')).toBe('Olá, mundo!');
- expect(concatenarStrings('', 'teste')).toBe('teste');
- expect(concatenarStrings('123', '456')).toBe('123456');
-});
+
+
+/**
+ * Exercício 03 - divisivelPor11
+ * Nome da função - divisivelPor11
+ * Crie uma função que retorna um array com os números divisíveis por 11 no intervalo
+ * @param {number} min Número mínimo
+ * @param {number} max Número máximo
+ * @returns {number[]} Retorna um array com os números divisíveis por 11 no intervalo
+ * @example
+ *  divisivelPor11(1, 100) // [11, 22, 33, 44, 55, 66, 77, 88, 99]
+ *  
+ * divisivelPor11(11, 110) // [11, 22, 33, 44, 55, 66, 77, 88, 99, 110]
+ */
+
+//Início do seu código
+function divisivelPor11(min:number, max:number): number[] {
+    for(let i = 1; i>= 100; i++){
+        let array = []
+        if(i % 11 == 0){
+           array = [i]
+        }
+    }
+    return array;
+}
+
+//Fim do seu código
+
+test('divisivelPor11', () => {
+    expect(divisivelPor11(1, 100)).toEqual([11, 22, 33, 44, 55, 66, 77, 88, 99])
+})
+test("divisivelPor11 quando min =11 e max 110", () => {
+    expect(divisivelPor11(11, 110)).toEqual([11, 22, 33, 44, 55, 66, 77, 88, 99, 110])
+})
+test('divisivelPor11 quando valores trocados', () => {
+    expect(divisivelPor11(100, 1)).toEqual([])
+})
